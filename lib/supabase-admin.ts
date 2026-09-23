@@ -1,8 +1,8 @@
 const supabaseUrl = process.env.SUPABASE_URL;
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const secretKey = process.env.SUPABASE_SECRET_KEY;
 
 function assertConfig() {
-  if (!supabaseUrl || !serviceRoleKey) {
+  if (!supabaseUrl || !secretKey) {
     throw new Error("Supabase belum dikonfigurasi di Environment Variables.");
   }
 }
@@ -13,8 +13,8 @@ async function request(path: string, init?: RequestInit) {
   const response = await fetch(`${supabaseUrl}/rest/v1/${path}`, {
     ...init,
     headers: {
-      apikey: serviceRoleKey!,
-      Authorization: `Bearer ${serviceRoleKey!}`,
+      apikey: secretKey!,
+      Authorization: `Bearer ${secretKey!}`,
       "Content-Type": "application/json",
       ...(init?.headers ?? {}),
     },
