@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { isE164 } from "@/lib/phone";
-import { checkVerification } from "@/lib/twilio";
+import { checkVerification } from "@/lib/vonage";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -8,14 +7,14 @@ export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const phone = typeof body?.phone === "string" ? body.phone.trim() : "";
+    const requestId = typeof body?.requestId === "string" ? body.requestId.trim() : "";
     const code = typeof body?.code === "string" ? body.code.trim() : "";
 
-    if (!isE164(phone) || !/^\d{4,10}$/.test(code)) {
-      return NextResponse.json({ error: "Nomor atau kode OTP tidak valid." }, { status: 400 });
+    if (!requestId || !/^\d{4,10}$/.test(code)) {
+      return NextResponse.json({ error: "Request ID atau kode OTP tidak valid." }, { status: 400 });
     }
 
-    const verification = await checkVerification(phone, code);
+    const verification = await checkVerification(requestId, code);
 
     return NextResponse.json({
       ok: true,
