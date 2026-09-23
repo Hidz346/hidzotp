@@ -15,6 +15,10 @@ function mapChannel(channel: Channel) {
   return channel === "call" ? "voice" : channel;
 }
 
+function toVonageNumber(to: string) {
+  return to.replace(/^\+/, "");
+}
+
 async function requestVerify(path: string, body: unknown) {
   assertConfig();
   const response = await fetch(`https://api.nexmo.com/v2/verify${path}`, {
@@ -42,7 +46,7 @@ export async function sendVerification(to: string, channel: Channel) {
   return requestVerify("", {
     brand: "HidzOtp",
     code_length: 6,
-    workflow: [{ channel: mapChannel(channel), to }],
+    workflow: [{ channel: mapChannel(channel), to: toVonageNumber(to) }],
   });
 }
 
