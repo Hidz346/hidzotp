@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { isE164 } from "@/lib/phone";
-import { sendVerification } from "@/lib/twilio";
+import { sendVerification } from "@/lib/vonage";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       ok: true,
-      verificationId: verification.sid ?? "",
+      verificationId: verification.request_id ?? "",
       status: verification.status ?? "pending",
       cooldownSeconds: COOLDOWN_SECONDS,
     });
