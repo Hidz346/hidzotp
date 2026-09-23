@@ -90,12 +90,12 @@ export default function Home() {
       const response = await fetch("/api/otp/check", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: normalized, code: code.trim() }),
+        body: JSON.stringify({ requestId: verificationId, code: code.trim() }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Verifikasi gagal.");
 
-      setStatus(data.status === "approved" ? "OTP benar. Nomor berhasil diverifikasi." : "OTP belum terverifikasi.");
+      setStatus(data.status === "completed" ? "OTP benar. Nomor berhasil diverifikasi." : "OTP belum terverifikasi.");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Terjadi kesalahan.");
     } finally {
