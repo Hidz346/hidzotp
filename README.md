@@ -29,14 +29,18 @@ The recipient number is entered manually. The application does not include bulk 
 4. Fill in `VONAGE_API_KEY` and `VONAGE_API_SECRET`.
 5. Run `npm run dev`.
 
-## Vercel
+## Supabase + Vercel
 
-Add these Environment Variables to the project:
+HidzOtp stores verification request metadata and the server-side cooldown state in Supabase.
+
+Add these Environment Variables to Vercel:
 
 - `VONAGE_API_KEY`
 - `VONAGE_API_SECRET`
+- `SUPABASE_URL=https://jkboiocwdxujsblyygjf.supabase.co`
+- `SUPABASE_SECRET_KEY`
 
-Never expose the Vonage credentials in client-side code.
+`SUPABASE_SECRET_KEY` is server-only. Never add it to client-side code, commit it to Git, or expose it with a `NEXT_PUBLIC_` prefix.
 
 This implementation uses Vonage Verify V2 Basic Authentication with the API key and secret. Phone numbers are sent in E.164 format. WhatsApp verification requires a Vonage WhatsApp Business Account (WABA) configured for Verify; SMS and Voice depend on Verify channel availability for the destination.
 
