@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f5f3ee;
+  --ink: #111111;
+  --panel: #ffffff;
+  --muted: #6d6a63;
+  --accent: #d7ff35;
+  --accent-2: #ff5ca8;
+  --line: 3px;
+  --shadow: 7px 7px 0 #111111;
+}
+
+.dark {
+  --bg: #111111;
+  --ink: #f5f3ee;
+  --panel: #1b1b1b;
+  --muted: #b0aea7;
+  --accent: #d7ff35;
+  --accent-2: #ff5ca8;
+  --shadow: 7px 7px 0 #d7ff35;
+}
+
+* { box-sizing: border-box; }
+html { min-height: 100%; background: var(--bg); }
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(rgba(17,17,17,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17,17,17,.055) 1px, transparent 1px),
+    var(--bg);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+::selection { background: var(--accent); color: #111; }
+
+.neo {
+  border: var(--line) solid var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.neo-soft {
+  border: var(--line) solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.panel { background: var(--panel); }
+.mono { font-family: "Courier New", Courier, monospace; }
